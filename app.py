@@ -47,7 +47,6 @@ css_code = f"""
         align-items: center;
         height: 300px;
         flex-direction: column;
-        margin-top: 100px;
     }}
     
     /* 小人样式 (Emoji) */
@@ -67,39 +66,47 @@ css_code = f"""
     /* 对话气泡样式 */
     .bubble {{
         position: absolute;
-        top: -80px; /* 在小人头顶 */
-        background-color: #FFEFD5; /* 只有你懂的暖色调 */
+        /* 以前是 top: -80px (头顶) */
+        /* 现在改成 top: 110px (脚下) -> 因为机器人高100px，稍微留点缝隙 */
+        top: 130px; 
+        
+        background-color: #FFEFD5;
         color: #333;
         padding: 15px 25px;
         border-radius: 20px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         font-size: 18px;
         font-weight: bold;
-        width: 300px;
+        width: 350px; /*稍微把宽度加宽一点，容纳更多字*/
         text-align: center;
         
-        /* 关键：默认隐藏，鼠标移上去显示 */
         opacity: 0; 
-        transition: opacity 0.5s;
+        transition: opacity 0.5s, top 0.5s; /* 增加 top 的过渡动画 */
         pointer-events: none;
+        z-index: 10; /* 保证气泡在最上层 */
     }}
     
-    /* 核心交互：当鼠标悬停在 container 上时，bubble 变可见 */
+    /* 核心交互：鼠标悬停时 */
     .container:hover .bubble {{
         opacity: 1;
-        top: -100px; /*稍微往上浮动一点的动画*/
+        top: 120px; /* 悬停时稍微往上浮动一点点，有个动态感 */
     }}
     
-    /* 气泡的小尾巴 */
+    /* --- 修改部分 2：气泡的小尾巴 (三角形) --- */
     .bubble::after {{
         content: '';
         position: absolute;
-        bottom: -10px;
+        /* 以前是 bottom: -10px (下面) */
+        /* 现在改成 top: -20px (放到气泡顶端) */
+        top: -20px; 
+        
         left: 50%;
         margin-left: -10px;
         border-width: 10px;
         border-style: solid;
-        border-color: #FFEFD5 transparent transparent transparent;
+        
+        /* 以前是上色下透，现在改成：下色上透 (指向上方) */
+        border-color: transparent transparent #FFEFD5 transparent;
     }}
 </style>
 
