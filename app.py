@@ -8,6 +8,15 @@ st.set_page_config(
     layout="centered"
 )
 
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # --- 2. 核心逻辑区 (模拟 LLM) ---
 # 既然你是大模型专家，之后可以在这里接入 DeepSeek/OpenAI API
 # 目前我们先用一个简单的列表代替，保证项目能跑通
@@ -38,6 +47,7 @@ css_code = f"""
         align-items: center;
         height: 300px;
         flex-direction: column;
+        margin-top: 100px;
     }}
     
     /* 小人样式 (Emoji) */
